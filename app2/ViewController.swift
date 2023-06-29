@@ -755,8 +755,8 @@ class Core{
     static let shared = Core()
     
     func isNewUser() -> Bool{
-        return true
-        //return !UserDefaults.standard.bool(forKey: "isNewUser")
+        //return true
+        return !UserDefaults.standard.bool(forKey: "isNewUser")
     }
     
     func setIsNotNewUser(){
