@@ -1,0 +1,21 @@
+{
+  "images" : [
+    {
+      "filename" : "depositphotos_422457038-stock-photo-neck-basic-orange-shirt-white.jpg",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

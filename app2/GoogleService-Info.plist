@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>1037942490100-tacdj2qdka8llsl4d2b34jafsaaio448.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.1037942490100-tacdj2qdka8llsl4d2b34jafsaaio448</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBoK-p0gHLT74cCHvxIbno32ubyUsumpBo</string>
+	<key>GCM_SENDER_ID</key>
+	<string>1037942490100</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.cindy.app2</string>
+	<key>PROJECT_ID</key>
+	<string>photouploader-e4f21</string>
+	<key>STORAGE_BUCKET</key>
+	<string>photouploader-e4f21.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:1037942490100:ios:2804377e1d892c9ca06fa1</string>
+</dict>
+</plist>
