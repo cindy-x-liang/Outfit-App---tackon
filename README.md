@@ -7,7 +7,8 @@ TackOn allows users to choose outfits based on recommendations provided from cur
 Users can also use the travel function in the app to plan outfits ahead of time.
 
 ## Video Demo
-https://drive.google.com/file/d/1Vv6Dg7_bUJcN_MAOjqLbS7hAtRkSexOo/view?usp=sharing
+[6/23/23] https://drive.google.com/file/d/1Vv6Dg7_bUJcN_MAOjqLbS7hAtRkSexOo/view?usp=sharing
+[1/4/2024 -- updated with ChatGPT and iOS location sharing] https://drive.google.com/file/d/1PFts0GqbkLFtrIy5J2CAgteuEfjcOudj/view?usp=sharing
 
 
 ## A detailed run down
