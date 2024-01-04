@@ -10,12 +10,12 @@ import UIKit
 class OutfitViewController: UIViewController, addSongDelegate {
     func addSong(song: Clothes) {
         if (song.clothesType == "Top"){
-            //clothes[0].append(song)
-            collectionView.performBatchUpdates({
-                let indexPath = IndexPath(row: 0, section: clothes[0].count-1)
-                clothes[0].append(song) //add your object to data source first
-                self.collectionView?.insertItems(at: [indexPath])
-            }, completion: nil)
+            clothes[0].append(song)
+//            collectionView.performBatchUpdates({
+//                let indexPath = IndexPath(row: 0, section: clothes[0].count-1)
+//                clothes[0].append(song) //add your object to data source first
+//                self.collectionView?.insertItems(at: [indexPath])
+//            }, completion: nil)
         }
         else if (song.clothesType == "Bottom"){
             clothes[1].append(song)

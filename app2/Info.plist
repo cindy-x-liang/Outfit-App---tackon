@@ -23,5 +23,7 @@
 	</dict>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Please allow access to upload photos.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Please allow access to location to receive outfit recommendation!</string>
 </dict>
 </plist>

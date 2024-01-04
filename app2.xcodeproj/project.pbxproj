@@ -25,6 +25,10 @@
 		EE7793FA2A352232002E002A /* OutfitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE7793F92A352232002E002A /* OutfitViewController.swift */; };
 		EE7793FC2A363BDC002E002A /* DisplayOutfitCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE7793FB2A363BDC002E002A /* DisplayOutfitCollectionView.swift */; };
 		EE7793FE2A37C4BA002E002A /* TravelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE7793FD2A37C4BA002E002A /* TravelViewController.swift */; };
+		EEC290D32B434DA900053D44 /* OpenAISwift in Frameworks */ = {isa = PBXBuildFile; productRef = EEC290D22B434DA900053D44 /* OpenAISwift */; };
+		EEC290D52B434F0A00053D44 /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEC290D42B434F0A00053D44 /* Chat.swift */; };
+		EEC290D82B43608F00053D44 /* LangChain in Frameworks */ = {isa = PBXBuildFile; productRef = EEC290D72B43608F00053D44 /* LangChain */; };
+		EEC290DC2B43641300053D44 /* env.txt in Resources */ = {isa = PBXBuildFile; fileRef = EEC290DB2B43641300053D44 /* env.txt */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +54,8 @@
 		EE7793F92A352232002E002A /* OutfitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutfitViewController.swift; sourceTree = "<group>"; };
 		EE7793FB2A363BDC002E002A /* DisplayOutfitCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayOutfitCollectionView.swift; sourceTree = "<group>"; };
 		EE7793FD2A37C4BA002E002A /* TravelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelViewController.swift; sourceTree = "<group>"; };
+		EEC290D42B434F0A00053D44 /* Chat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
+		EEC290DB2B43641300053D44 /* env.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = env.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +63,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EEC290D82B43608F00053D44 /* LangChain in Frameworks */,
+				EEC290D32B434DA900053D44 /* OpenAISwift in Frameworks */,
 				0819F6AAFFB5EA7AF689692E /* Pods_app2.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -105,6 +113,8 @@
 				EE7793E92A2D797F002E002A /* WelcomeViewController.swift */,
 				EE7793D52A2D792B002E002A /* AppDelegate.swift */,
 				EE7793F12A34E8D7002E002A /* PushViewController.swift */,
+				EEC290DB2B43641300053D44 /* env.txt */,
+				EEC290D42B434F0A00053D44 /* Chat.swift */,
 				EE7793D72A2D792B002E002A /* SceneDelegate.swift */,
 				EE7793F52A351E87002E002A /* CustomCollectionViewCell.swift */,
 				EE7793FD2A37C4BA002E002A /* TravelViewController.swift */,
@@ -142,6 +152,10 @@
 			dependencies = (
 			);
 			name = app2;
+			packageProductDependencies = (
+				EEC290D22B434DA900053D44 /* OpenAISwift */,
+				EEC290D72B43608F00053D44 /* LangChain */,
+			);
 			productName = app2;
 			productReference = EE7793D22A2D792B002E002A /* app2.app */;
 			productType = "com.apple.product-type.application";
@@ -170,6 +184,10 @@
 				Base,
 			);
 			mainGroup = EE7793C92A2D792B002E002A;
+			packageReferences = (
+				EEC290D12B434DA900053D44 /* XCRemoteSwiftPackageReference "OpenAISwift" */,
+				EEC290D62B43608F00053D44 /* XCRemoteSwiftPackageReference "langchain-swift" */,
+			);
 			productRefGroup = EE7793D32A2D792B002E002A /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -184,6 +202,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EEC290DC2B43641300053D44 /* env.txt in Resources */,
 				EE7793E22A2D792C002E002A /* LaunchScreen.storyboard in Resources */,
 				EE7793DF2A2D792C002E002A /* Assets.xcassets in Resources */,
 				EE7793F02A34CCD8002E002A /* GoogleService-Info.plist in Resources */,
@@ -241,6 +260,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EEC290D52B434F0A00053D44 /* Chat.swift in Sources */,
 				EE7793FC2A363BDC002E002A /* DisplayOutfitCollectionView.swift in Sources */,
 				EE7793F42A351E51002E002A /* Clothes.swift in Sources */,
 				EE7793FA2A352232002E002A /* OutfitViewController.swift in Sources */,
@@ -472,6 +492,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		EEC290D12B434DA900053D44 /* XCRemoteSwiftPackageReference "OpenAISwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/adamrushy/OpenAISwift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.4.1;
+			};
+		};
+		EEC290D62B43608F00053D44 /* XCRemoteSwiftPackageReference "langchain-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/buhe/langchain-swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.43.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		EEC290D22B434DA900053D44 /* OpenAISwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EEC290D12B434DA900053D44 /* XCRemoteSwiftPackageReference "OpenAISwift" */;
+			productName = OpenAISwift;
+		};
+		EEC290D72B43608F00053D44 /* LangChain */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EEC290D62B43608F00053D44 /* XCRemoteSwiftPackageReference "langchain-swift" */;
+			productName = LangChain;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		EE3781242A3E61DF00DF8D3D /* Model.xcdatamodeld */ = {

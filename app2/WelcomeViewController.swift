@@ -92,7 +92,7 @@ class WelcomeViewController: UIViewController {
         image4.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(image4)
         
-        label1.text = "input your zipcode to get an outfit recommendation based on the weather"
+        label1.text = "get an outfit recommendation based on the weather data "
         label1.numberOfLines = 3
         label1.font = .systemFont(ofSize: 15, weight: .regular)
         label1.translatesAutoresizingMaskIntoConstraints = false
@@ -286,7 +286,7 @@ class WelcomeViewController: UIViewController {
 //            }
             
         delegate?.setPressed(bool: true)
-        
+        delegate?.doOnce()
             return
         //scroll to next page
 //        scrollView.setContentOffset(CGPoint(x:holderView.frame.size.width * CGFloat(button.tag), y:0), animated: true)
@@ -300,4 +300,5 @@ protocol saveInfoDelegate: UIViewController {
     func setName(str: String)
     //func setLocation(str: String)
     func setPressed(bool: Bool)
+    func doOnce()
 }

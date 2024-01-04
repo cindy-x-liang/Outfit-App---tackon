@@ -144,13 +144,13 @@ class TravelViewController: UIViewController,  UIScrollViewDelegate,addSongDeleg
         intro.lineBreakMode = .byWordWrapping
         scrollView.addSubview(intro)
         
-        locationLaebl.text = "Location of Travel:"
+        locationLaebl.text = "City of Travel:"
         locationLaebl.font = .systemFont(ofSize: 20, weight: .bold)
         locationLaebl.translatesAutoresizingMaskIntoConstraints = false
         scrollView.addSubview(locationLaebl)
         
         
-        lengthLabel.text = "Length of Travel:"
+        lengthLabel.text = "Days of Travel:"
         lengthLabel.font = .systemFont(ofSize: 20, weight: .bold)
         lengthLabel.translatesAutoresizingMaskIntoConstraints = false
         scrollView.addSubview(lengthLabel)
@@ -160,7 +160,7 @@ class TravelViewController: UIViewController,  UIScrollViewDelegate,addSongDeleg
             print("in here")
         }
         else{
-            locationText.placeholder = "Enter zipcode"
+            locationText.placeholder = "Enter city name"
         }
         
         //locationText.placeholder = "Enter zipcode"
@@ -204,6 +204,7 @@ class TravelViewController: UIViewController,  UIScrollViewDelegate,addSongDeleg
         
         day1OLabel.translatesAutoresizingMaskIntoConstraints = false
         day1OLabel.font = UIFont(name:"Helvetica-Bold", size:18)
+        day1OText.numberOfLines = 2
         scrollView.addSubview(day1OLabel)
         
         day1OText.translatesAutoresizingMaskIntoConstraints = false
@@ -223,6 +224,7 @@ class TravelViewController: UIViewController,  UIScrollViewDelegate,addSongDeleg
         scrollView.addSubview(day2OLabel)
         
         day2OText.translatesAutoresizingMaskIntoConstraints = false
+        day2OText.numberOfLines = 2
         scrollView.addSubview(day2OText)
     
         
@@ -240,6 +242,7 @@ class TravelViewController: UIViewController,  UIScrollViewDelegate,addSongDeleg
         scrollView.addSubview(day3OLabel)
         
         day3OText.translatesAutoresizingMaskIntoConstraints = false
+        day3OText.numberOfLines = 2
         scrollView.addSubview(day3OText)
     
         
@@ -256,6 +259,7 @@ class TravelViewController: UIViewController,  UIScrollViewDelegate,addSongDeleg
         scrollView.addSubview(day4OLabel)
         
         day4OText.translatesAutoresizingMaskIntoConstraints = false
+        day4OText.numberOfLines = 2
         scrollView.addSubview(day4OText)
         
         
@@ -274,6 +278,7 @@ class TravelViewController: UIViewController,  UIScrollViewDelegate,addSongDeleg
         scrollView.addSubview(day5OLabel)
         
         day5OText.translatesAutoresizingMaskIntoConstraints = false
+        day5OText.numberOfLines = 2
         scrollView.addSubview(day5OText)
         
         
@@ -292,6 +297,7 @@ class TravelViewController: UIViewController,  UIScrollViewDelegate,addSongDeleg
         scrollView.addSubview(day6OLabel)
         
         day6OText.translatesAutoresizingMaskIntoConstraints = false
+        day6OText.numberOfLines = 2
         scrollView.addSubview(day6OText)
         
         
@@ -310,6 +316,7 @@ class TravelViewController: UIViewController,  UIScrollViewDelegate,addSongDeleg
         scrollView.addSubview(day7OLabel)
         
         day7OText.translatesAutoresizingMaskIntoConstraints = false
+        day7OText.numberOfLines = 2
         scrollView.addSubview(day7OText)
         
         let flowLayout = UICollectionViewFlowLayout()
@@ -502,7 +509,8 @@ class TravelViewController: UIViewController,  UIScrollViewDelegate,addSongDeleg
         
         NSLayoutConstraint.activate([
             day1OText.leadingAnchor.constraint(equalTo: locationLaebl.leadingAnchor),
-            day1OText.topAnchor.constraint(equalTo: day1OLabel.bottomAnchor, constant: 15)
+            day1OText.topAnchor.constraint(equalTo: day1OLabel.bottomAnchor, constant: 15),
+            day1OText.trailingAnchor.constraint(equalTo:view.safeAreaLayoutGuide.trailingAnchor)
         ])
         
         let collectionViewPadding: CGFloat = 12
@@ -524,7 +532,8 @@ class TravelViewController: UIViewController,  UIScrollViewDelegate,addSongDeleg
         
         NSLayoutConstraint.activate([
             day2OText.leadingAnchor.constraint(equalTo: locationLaebl.leadingAnchor),
-            day2OText.topAnchor.constraint(equalTo: day2OLabel.bottomAnchor, constant: 15)
+            day2OText.topAnchor.constraint(equalTo: day2OLabel.bottomAnchor, constant: 15),
+            day2OText.trailingAnchor.constraint(equalTo:view.safeAreaLayoutGuide.trailingAnchor)
         ])
         
         
@@ -545,7 +554,8 @@ class TravelViewController: UIViewController,  UIScrollViewDelegate,addSongDeleg
         
         NSLayoutConstraint.activate([
             day3OText.leadingAnchor.constraint(equalTo: locationLaebl.leadingAnchor),
-            day3OText.topAnchor.constraint(equalTo: day3OLabel.bottomAnchor, constant: 15)
+            day3OText.topAnchor.constraint(equalTo: day3OLabel.bottomAnchor, constant: 15),
+            day3OText.trailingAnchor.constraint(equalTo:view.safeAreaLayoutGuide.trailingAnchor)
         ])
         
         
@@ -566,7 +576,8 @@ class TravelViewController: UIViewController,  UIScrollViewDelegate,addSongDeleg
         
         NSLayoutConstraint.activate([
             day4OText.leadingAnchor.constraint(equalTo: locationLaebl.leadingAnchor),
-            day4OText.topAnchor.constraint(equalTo: day4OLabel.bottomAnchor, constant: 15)
+            day4OText.topAnchor.constraint(equalTo: day4OLabel.bottomAnchor, constant: 15),
+            day4OText.trailingAnchor.constraint(equalTo:view.safeAreaLayoutGuide.trailingAnchor)
         ])
         
 
@@ -587,7 +598,8 @@ class TravelViewController: UIViewController,  UIScrollViewDelegate,addSongDeleg
 
         NSLayoutConstraint.activate([
             day5OText.leadingAnchor.constraint(equalTo: locationLaebl.leadingAnchor),
-            day5OText.topAnchor.constraint(equalTo: day5OLabel.bottomAnchor, constant: 15)
+            day5OText.topAnchor.constraint(equalTo: day5OLabel.bottomAnchor, constant: 15),
+            day5OText.trailingAnchor.constraint(equalTo:view.safeAreaLayoutGuide.trailingAnchor)
         ])
         
         NSLayoutConstraint.activate([
@@ -607,7 +619,8 @@ class TravelViewController: UIViewController,  UIScrollViewDelegate,addSongDeleg
 
         NSLayoutConstraint.activate([
             day6OText.leadingAnchor.constraint(equalTo: locationLaebl.leadingAnchor),
-            day6OText.topAnchor.constraint(equalTo: day6OLabel.bottomAnchor, constant: 15)
+            day6OText.topAnchor.constraint(equalTo: day6OLabel.bottomAnchor, constant: 15),
+            day6OText.trailingAnchor.constraint(equalTo:view.safeAreaLayoutGuide.trailingAnchor)
         ])
 
         NSLayoutConstraint.activate([
@@ -627,7 +640,8 @@ class TravelViewController: UIViewController,  UIScrollViewDelegate,addSongDeleg
 
         NSLayoutConstraint.activate([
             day7OText.leadingAnchor.constraint(equalTo: locationLaebl.leadingAnchor),
-            day7OText.topAnchor.constraint(equalTo: day7OLabel.bottomAnchor, constant: 15)
+            day7OText.topAnchor.constraint(equalTo: day7OLabel.bottomAnchor, constant: 15),
+            day7OText.trailingAnchor.constraint(equalTo:view.safeAreaLayoutGuide.trailingAnchor)
         ])
         NSLayoutConstraint.activate([
             scrollView.bottomAnchor.constraint(equalTo: layout.bottomAnchor, constant: -150)
@@ -793,10 +807,58 @@ class TravelViewController: UIViewController,  UIScrollViewDelegate,addSongDeleg
     var lat: String = ""
     var long:String = ""
     var numDays:Int = 1
+    
+    func getCityCoords(city:String)->String{
+        var resulta = ""
+        let url = "https://geocode.maps.co/search?q=\(city)&api_key=6594c2d3cda70188999333ias807a53"
+        print(url)
+        let task = URLSession.shared.dataTask(with: URL(string: url)!, completionHandler: { [self]data, response, error in
+            guard let data = data, error == nil else{
+                print("something went wrong")
+                return
+            }
+
+            var result: [PlaceCoordT]?
+
+            do {
+                result = try JSONDecoder().decode([PlaceCoordT].self, from: data)
+            }
+            catch{
+                print(url)
+            }
+
+            guard let json = result else {
+                print("failedd ")
+                return
+            }
+            
+            var lat = json[0].lat
+            var long = json[0].lon
+            resulta = "https://api.weather.gov/points/" + lat + "," + long
+            //elf.ans = resulta
+            print(resulta)
+            callFunction(concatenatedString: resulta)
+            print(resulta)
+        })
+
+        task.resume()
+        
+        return resulta
+    }
+    struct PlaceCoordT: Codable{
+        let lat: String
+        let lon: String
+    }
+//    struct Coord:Codable{
+//        let lat: String
+//        let lon: String
+//    }
+  
+    
     @objc func pressButton() {
         
-        UserDefaults().setValue(locationText.text, forKey: "zipcodeVacay")
-        UserDefaults().setValue(lengthText.text, forKey: "lenVacation")
+//        UserDefaults().setValue(locationText.text, forKey: "zipcodeVacay")
+//        UserDefaults().setValue(lengthText.text, forKey: "lenVacation")
         
         
         self.numDays = Int(lengthText.text ?? "1")!
@@ -817,31 +879,42 @@ class TravelViewController: UIViewController,  UIScrollViewDelegate,addSongDeleg
         print(csvRows.count)
         print(lat)
 
-        let concatenatedString = "https://api.weather.gov/points/" + lat + "," + long
-
-        //read from excel or csv
-        //var url = "https://api.weather.gov/points/\(lat),\(long)"
-
-        print(concatenatedString.replacingOccurrences(of: "\"", with: ""))
-        //problem is thatt here is a lot of data in this do i need to include all?
-
-
-        var songNumber:[Int] = []
+        //let concatenatedString = "https://api.weather.gov/points/" + lat + "," + long
+        let concatenatedString = getCityCoords(city: locationText.text ?? "Dallas")
+        //print(getCityCoords(city:  "Dallas"))
+        //I NEED EVERYTHING TO WAIT FOR API CALL TO GET COORDS
+        //let concatenatedString = getCityCoords(city:  "Dallas")
         
-       
+  
+//
+//        print(concatenatedString.replacingOccurrences(of: "\"", with: ""))
+//      
+//
+//
+//        var songNumber:[Int] = []
+//        
+//       
+//            songNumber = self.getCoord(from: concatenatedString.replacingOccurrences(of: "\"", with: ""))
+//            print("SongNumber \(songNumber)")
+//            print("Temps \(self.temps)")
+            
+    }
+    @objc func callFunction(concatenatedString: String){
+    
+        //I NEED EVERYTHING TO WAIT FOR API CALL TO GET COORDS
+        //let concatenatedString = getCityCoords(city:  "Dallas")
+        
+        DispatchQueue.main.async {
+            
+            print(concatenatedString.replacingOccurrences(of: "\"", with: ""))
+            
+            
+            
+            var songNumber:[Int] = []
             songNumber = self.getCoord(from: concatenatedString.replacingOccurrences(of: "\"", with: ""))
             print("SongNumber \(songNumber)")
             print("Temps \(self.temps)")
-            
-
-
-        //if temp below 0 big puffer jacket several layers
-        //add humidity later
-
-        //HOW DO I GET THIS TO UPDATE AFTER THE CALL
-     
-
-        
+        }
     }
     @objc func pressButtonUpdate(){
         

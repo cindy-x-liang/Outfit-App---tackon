@@ -8,8 +8,11 @@ import UIKit
 import Foundation
 import TabularData
 import FirebaseStorage
+import CoreLocation
 
-class ViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, saveInfoDelegate, banana, vacayDelegate{
+class ViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, CLLocationManagerDelegate, saveInfoDelegate, banana, vacayDelegate{
+    
+    
     func addClothesItemToVC(clo: Clothes, mainVCPress: Bool, travelVCPress: Bool) {
         if (mainVCPress){
             topImage = clo
@@ -24,14 +27,9 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
 
     
     func setName(str: String){
-        if let name = UserDefaults().value(forKey:"userName") as? String{
-            welcomeText.text = "welcome, \(name) "
-            print("in here")
-        }
-        else{
             welcomeText.text = "welcome, \(str) "
             print("here")
-        }
+        
     }
 //    func setLocation(str: String){
 //        locationLabel.text = str
@@ -53,7 +51,7 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
     var outfitLabel = UILabel()
     var locationLabel = UILabel()
     let button = UIButton()
-    var location = UITextField()
+    var location = UILabel()
     var welcomeText = UILabel()
     var temp: Int? = nil
     var outfitText = UILabel()
@@ -70,6 +68,8 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
     var windSpeed = UILabel()
     var rectangle = UIImageView()
     var yourOutfitReco = UILabel()
+    var manager: CLLocationManager?
+//    var locationDisplay = UILabel()
     
     let itemPadding: CGFloat = 10
     let sectionPadding: CGFloat = 5
@@ -112,7 +112,7 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
         }
         //semaphoreName.signal()
         
-
+//        locationDisplay.text = "ready"
         let filterFlowLayout = UICollectionViewFlowLayout()
         filterFlowLayout.minimumLineSpacing = itemPadding
         filterFlowLayout.minimumInteritemSpacing = itemPadding
@@ -128,12 +128,12 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
         
         
         
-        //var toInsert: String = "Welcome, \(nameLabel.text) "
-        //welcomeText.text = toInsert
-        if let name = UserDefaults().value(forKey:"userName") as? String{
-            welcomeText.text = "welcome, \(name) "
-            print("in here")
-        }
+        var toInsert: String = "Welcome, \(nameLabel.text) "
+        welcomeText.text = toInsert
+//        if let name = UserDefaults().value(forKey:"userName") as? String{
+//            welcomeText.text = "welcome, \(name) "
+//            print("in here")
+//        }
         welcomeText.translatesAutoresizingMaskIntoConstraints = false
         welcomeText.font = UIFont(name:"Helvetica-Bold", size:35)
         welcomeText.lineBreakMode = .byWordWrapping
@@ -155,16 +155,17 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
         yourOutfitReco.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(yourOutfitReco)
         
-        if let zip = UserDefaults().value(forKey:"zipcodeHome") as? String{
-            location.text = zip
-            print("in here")
-        }
-        else{
-            location.placeholder = "enter zip code"
-        }
-        
-        location.placeholder = "enter zip code"
-        location.font = .systemFont(ofSize: 20, weight: .bold)
+//        if let zip = UserDefaults().value(forKey:"zipcodeHome") as? String{
+//            location.text = zip
+//            print("in here")
+//        }
+//        else{
+//            location.placeholder = "enter zip code"
+//        }
+//        
+//        location.placeholder = "enter zip code"
+        location.text = "gathering current location data..."
+        location.font = .systemFont(ofSize: 12)
         location.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(location)
         
@@ -174,7 +175,7 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
         button.setTitleColor(.black, for: .normal)
         //button.setImage(UIImage(named: "setLocationButt"), for: .normal)
         
-        button.setTitle("set location ->", for: .normal)
+        button.setTitle("go ->", for: .normal)
         view.addSubview(button)
 
         rectangle.image = UIImage(named: "Rectangle 13")
@@ -218,6 +219,7 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
         outfitText.text = ""
         outfitText.translatesAutoresizingMaskIntoConstraints = false
         outfitText.numberOfLines = 2
+        outfitText.font = UIFont(name:"Helvetica", size:12)
         //outfitText.lineBreakMode = .byCharWrapping
         view.addSubview(outfitText)
         
@@ -241,7 +243,9 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
         //vacationMode.setImage(UIImage(named: "travelicon"), for: .normal)
         view.addSubview(vacationMode)
         
-        
+//        locationDisplay.translatesAutoresizingMaskIntoConstraints = false
+//        //vacationMode.setImage(UIImage(named: "travelicon"), for: .normal)
+//        view.addSubview(locationDisplay)
         
 //
 //        imageOut.translatesAutoresizingMaskIntoConstraints = false
@@ -277,7 +281,57 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
         
         setupConstraints()
     }
+    override func viewDidAppear(_ animated: Bool){
+        super.viewDidAppear(animated)
+        manager = CLLocationManager()
+        manager?.delegate = self
+        manager?.desiredAccuracy = kCLLocationAccuracyBest
+        manager?.requestWhenInUseAuthorization()
+        manager?.startUpdatingLocation()
+        
+    }
+    var cityName = ""
+    func locationManager (_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let first = locations.first else {
+            return
+        }
+        
+        //location.text = "\(first.coordinate.longitude) | \(first.coordinate.latitude)"
+        lat = String(first.coordinate.latitude)
+        long = String(first.coordinate.longitude)
+        
+//        doOnce(lat: lat,long: long)
+    }
+    var ans = ""
+    func doOnce() {
+//        print(lat)
+//        self.getCityName(lat: self.lat,long: self.long)
+//        DispatchQueue.main.async { [self] in
+//            self.location.text = self.ans
+//            self.location.translatesAutoresizingMaskIntoConstraints = false
+//            self.view.addSubview(self.location)
+//        }
+    }
+
     
+    var once = true
+//    func doOnce(lat:String, long:String){
+//        DispatchQueue.main.async {
+//            if self.once{
+//                
+//                Task{
+//                    self.location.text = self.getCityName(lat: lat,long: long)
+//                    self.once = false
+//                }
+//                //                    self.location.text = self.getCityName(lat: lat,long: long)
+//                //                    self.once = false
+//                
+//                
+//            }
+//            
+//            
+//        }
+//    }
     func setupConstraints() {
         
         NSLayoutConstraint.activate([
@@ -383,6 +437,10 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
             vacationMode.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             vacationMode.topAnchor.constraint(equalTo: filterCollectionView.bottomAnchor, constant: 15)
         ])
+//        NSLayoutConstraint.activate([
+//            locationDisplay.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+//            locationDisplay.bottomAnchor.constraint(equalTo: filterCollectionView.bottomAnchor)
+//        ])
         
     }
     
@@ -435,6 +493,46 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
             return result
         }
     
+    func getCityName(lat:String, long:String)->String{
+        var resulta = ""
+        let url = "https://geocode.maps.co/reverse?lat=\(lat)&lon=\(long)&api_key=6594c2d3cda70188999333ias807a53"
+        print(url)
+        let task = URLSession.shared.dataTask(with: URL(string: url)!, completionHandler: { [self]data, response, error in
+            guard let data = data, error == nil else{
+                print("something went wrong")
+                return
+            }
+
+            var result: PlaceCoord?
+
+            do {
+                result = try JSONDecoder().decode(PlaceCoord.self, from: data)
+            }
+            catch{
+                print("failed first one")
+            }
+
+            guard let json = result else {
+                print("ruh roh ")
+                return
+            }
+            
+            resulta = json.address.city
+            self.ans = resulta
+            print(resulta)
+        })
+
+        task.resume()
+        
+        return resulta
+    }
+    struct PlaceCoord: Codable{
+        let address: addy
+    }
+    struct addy: Codable{
+        let city: String
+    }
+   
     
     func getCoord(from url: String)->Int{
         var a = 0
@@ -482,7 +580,7 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
                 print("something went wrong")
                 return
             }
-
+            print(url)
             var result: Response?
 
             do {
@@ -641,28 +739,28 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
 //    }
     
     @objc func pressButton() {
-        UserDefaults().setValue(location.text, forKey: "zipcodeHome")
-        var data = readDataFromCSV(fileName: "uszips", fileType: "csv")
-            data = cleanRows(file: data!)
-            let csvRows = csv(data: data!)// UXM n. 166/167
-        let banana = csvRows[1][0]
-    
-        //can take in numeric input for zipcode and subtract it from 601 to get index
-        print(banana.compare("00601"))
-        print(banana.isEqual("00601"))
-        //string comparison isnt working
-        print(csvRows[1][0])
-        
-        for i in 0...csvRows.count-1{
-            if (csvRows[i][0].replacingOccurrences(of: "\"", with: "")==location.text){
-                print("in here")
-                
-                lat = csvRows[i][1]
-                long = csvRows[i][2]
-            }
-        }
-        print(csvRows.count)
-        print(lat)
+//        UserDefaults().setValue(location.text, forKey: "zipcodeHome")
+//        var data = readDataFromCSV(fileName: "uszips", fileType: "csv")
+//            data = cleanRows(file: data!)
+//            let csvRows = csv(data: data!)// UXM n. 166/167
+//        let banana = csvRows[1][0]
+//    
+//        //can take in numeric input for zipcode and subtract it from 601 to get index
+//        print(banana.compare("00601"))
+//        print(banana.isEqual("00601"))
+//        //string comparison isnt working
+//        print(csvRows[1][0])
+//        
+//        for i in 0...csvRows.count-1{
+//            if (csvRows[i][0].replacingOccurrences(of: "\"", with: "")==location.text){
+//                print("in here")
+//                
+//                lat = csvRows[i][1]
+//                long = csvRows[i][2]
+//            }
+//        }
+//        print(csvRows.count)
+//        print(lat)
         
         let concatenatedString = "https://api.weather.gov/points/" + lat + "," + long
        
@@ -690,7 +788,7 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
         
             
             
-            
+        var cityName = getCityName(lat:lat,long:long)
             print("this is self.temp \(self.temp)")
             
             //if temp below 0 big puffer jacket several layers
@@ -698,31 +796,62 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
 
         //}
     }
+    let tempBot = chatBot()
+    func updateOutfitTextHelper(inputText: String)-> String{
+  
 
+            var chatResponse = ""
+            Task{
+                chatResponse = await tempBot.run(userInput: inputText)
+                
+            }
+            return chatResponse
+        
+//        APICaller.shared.getResponse(input: inputText) { [weak self] result in
+//            switch result {
+//            case .success(let output):
+//                print("heyy")
+//                print(output)
+//                responses = output
+//            case .failure:
+//                print ("Failed" )
+//                responses = "failed"
+//            }
+//        }
+//        return responses ?? "failed2"
+    }
     @objc func updateOutFitText() {
         DispatchQueue.main.async {
-            
+            let inputText = "\(self.temp)"
+            print(inputText)
+            Task{
+                self.outfitText.text = await self.tempBot.run(userInput: inputText)
+                
+            }
+            //self.outfitText.text = self.updateOutfitTextHelper(inputText: inputText)
             //HOW DO I GET THIS TO UPDATE AFTER THE CALL
-            if (self.temp!<25){
-                self.outfitText.text = "Wear a thick winter coat with long pants. Be conscious of the heaters indoors wear layers under the coat. "
-            }
-            else if (self.temp!<=44){
-                self.outfitText.text = "Wear a light to medium coat with long pants and a tshirt underneath. "
-            }
-            else if (self.temp!<=64){
-                self.outfitText.text = "Wear a thin jacket or long sleeve shirt with pants.  "
-            }
-            else if (self.temp!<=79){
-                self.outfitText.text = "Short sleeves and shorts are acceptable \n but wear a jacket in case "
-            }
-            else{
-                self.outfitText.text = "Tank top and short weather, it is hot!"
-            }
+            
+//            if (self.temp!<25){
+//                self.outfitText.text = "Wear a thick winter coat with long pants. Be conscious of the heaters indoors wear layers under the coat. "
+//            }
+//            else if (self.temp!<=44){
+//                self.outfitText.text = "Wear a light to medium coat with long pants and a tshirt underneath. "
+//            }
+//            else if (self.temp!<=64){
+//                self.outfitText.text = "Wear a thin jacket or long sleeve shirt with pants.  "
+//            }
+//            else if (self.temp!<=79){
+//                self.outfitText.text = "Short sleeves and shorts are acceptable \n but wear a jacket in case "
+//            }
+//            else{
+//                self.outfitText.text = "Tank top and short weather, it is hot!"
+//            }
             
             self.timeOfDay.text = self.timeOfDayText
             self.tempDisplay.text = ", \(self.temp ?? 0)°F"
             self.humidity.text = self.detailFore
             self.yourOutfitReco.text = "Your Outfit Recommendation:"
+            self.location.text = self.ans
             
             self.outfitText.translatesAutoresizingMaskIntoConstraints = false
             self.view.addSubview(self.outfitText)
@@ -755,8 +884,8 @@ class Core{
     static let shared = Core()
     
     func isNewUser() -> Bool{
-        //return true
-        return !UserDefaults.standard.bool(forKey: "isNewUser")
+        return true
+        //return !UserDefaults.standard.bool(forKey: "isNewUser")
     }
     
     func setIsNotNewUser(){

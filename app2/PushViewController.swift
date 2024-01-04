@@ -8,7 +8,7 @@ import UIKit
 import FirebaseStorage
 
 class PushViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
-  
+
     private let storage = Storage.storage().reference()
 
     let buttonUpload = UIButton()
@@ -17,50 +17,50 @@ class PushViewController: UIViewController, UINavigationControllerDelegate, UIIm
     
     var newSongHeader = UILabel()
     var songTitleNew = UITextField()
-    
+
     var newPicButton = UIButton()
-    
+
     var saveButton = UIBarButtonItem()
-    
-    
-    
-    
-    
+
+
+
+
+
     weak var delegate: addSongDelegate?
-    
+
     init(inputDelegate: addSongDelegate) {
         delegate = inputDelegate
         super.init(nibName: nil, bundle: nil)
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        
+
         navigationItem.rightBarButtonItem = saveButton
         saveButton.title = "Save"
         saveButton.style = .plain
         saveButton.action = #selector(createSong)
         saveButton.target = self
-        
-        
+
+
         buttonUpload.addTarget(self, action: #selector(tapUploadButton), for: .touchUpInside)
         buttonUpload.translatesAutoresizingMaskIntoConstraints = false
         buttonUpload.setTitleColor(.black, for: .normal)
         buttonUpload.setImage(UIImage(named: "chooseImage"), for: .normal)
         //buttonUpload.setTitle("Upload Clothing Image", for: .normal)
         view.addSubview(buttonUpload)
-        
-        
+
+
         imageOut.translatesAutoresizingMaskIntoConstraints = false
         imageOut.contentMode = .scaleAspectFit
         view.addSubview(imageOut)
-        
-        
+
+
 //        labelURL.translatesAutoresizingMaskIntoConstraints = false
 //        view.addSubview(labelURL)
         
@@ -69,62 +69,67 @@ class PushViewController: UIViewController, UINavigationControllerDelegate, UIIm
         newSongHeader.textColor = .black
         newSongHeader.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(newSongHeader)
-        
+
         songTitleNew.textColor = .black
         songTitleNew.placeholder = "Enter the type of clothing"
         songTitleNew.font = .systemFont(ofSize: 20, weight: .bold)
         songTitleNew.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(songTitleNew)
-        
-        
-        
+
+
+        print("line 80")
         //get the text through a networking request
         
         //calls a function to get request for weather
         //parses what the outfit should be depending on weather
-        
-        guard let urlString = UserDefaults.standard.value(forKey: "url") as? String,
-              let url = URL(string: urlString) else{
-            return
-        }
+        //urlString = ""
+//        guard let urlString = UserDefaults.standard.value(forKey: "url") as? String,
+//              let url = URL(string: urlString) else{
+//            return
+//        }
+        print("line 90")
         //labelURL.text = urlString
-        let task = URLSession.shared.dataTask(with: url, completionHandler: {data, _, error in
-            guard let data = data, error == nil else{
-                return
-            }
-            
-            DispatchQueue.main.async{
-                let image = UIImage(data: data)
-                self.imageOut.image = image
-            }
-        })
-        
-        task.resume()
+//        let task = URLSession.shared.dataTask(with: url, completionHandler: {data, _, error in
+//            guard let data = data, error == nil else{
+//                return
+//            }
+//
+//            DispatchQueue.main.async{
+//                let image = UIImage(data: data)
+//                self.imageOut.image = image
+//            }
+//        })
+        let image = UIImage(named: "other1")
+        self.imageOut.image = image
+        view.addSubview(imageOut)
+        //task.resume()
         setupConstraints()
+        print("finishing constraints")
     }
-    
+
     func setupConstraints() {
-    
+        print("setting up constraints")
+
         NSLayoutConstraint.activate([
             newSongHeader.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
             newSongHeader.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 15)
         ])
-        
+
         NSLayoutConstraint.activate([
             imageOut.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
             imageOut.topAnchor.constraint(equalTo: newSongHeader.bottomAnchor, constant: 15),
             imageOut.widthAnchor.constraint(equalToConstant: 350),
             imageOut.heightAnchor.constraint(equalToConstant: 200)
         ])
-        
+
         NSLayoutConstraint.activate([
             buttonUpload.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
             buttonUpload.topAnchor.constraint(equalTo: imageOut.bottomAnchor, constant: 15),
             buttonUpload.widthAnchor.constraint(equalToConstant: 114),
             buttonUpload.heightAnchor.constraint(equalToConstant: 30)
         ])
-        
-        
+
+
 //        NSLayoutConstraint.activate([
 //            labelURL.leadingAnchor.constraint(equalTo: buttonUpload.leadingAnchor),
 //            labelURL.topAnchor.constraint(equalTo: imageOut.bottomAnchor, constant: 15)
@@ -139,18 +144,18 @@ class PushViewController: UIViewController, UINavigationControllerDelegate, UIIm
             songTitleNew.leadingAnchor.constraint(equalTo: imageOut.leadingAnchor, constant: 10),
             songTitleNew.topAnchor.constraint(equalTo: buttonUpload.bottomAnchor, constant: 15)
         ])
-       
-      
-        
+
+
+
     }
 
     @objc func createSong() {
         var newSong = Clothes(imageName: self.imageOut.image ?? UIImage(named: "box")!, clothesTypeEntered: self.songTitleNew.text ?? "Other")
         delegate?.addSong(song: newSong)
         self.navigationController?.popViewController(animated: true)
-        
+
     }
-    
+
        func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]){
            picker.dismiss(animated: true, completion: nil)
            guard let image = info[UIImagePickerController.InfoKey.editedImage] as? UIImage else{
@@ -169,17 +174,18 @@ class PushViewController: UIViewController, UINavigationControllerDelegate, UIIm
                    guard let url = url, error == nil else{
                        return
                    }
-                   
+
                    let urlString = url.absoluteString
                    DispatchQueue.main.async{
                        //self.labelURL.text = urlString
                        self.imageOut.image = image
+                       print("i am in here")
                    }
 
                    print("Download URL: \(urlString)")
                    UserDefaults.standard.set(urlString, forKey: "url")
                })
-               
+
            })
            //upload image data
            //get download url
@@ -191,8 +197,8 @@ class PushViewController: UIViewController, UINavigationControllerDelegate, UIIm
        func imagePickerControllerDidCancel(_ picker: UIImagePickerController){
            picker.dismiss(animated: true, completion: nil)
        }
-       
-       
+
+
        @objc func tapUploadButton(){
            let picker = UIImagePickerController()
            picker.sourceType = .photoLibrary
@@ -200,13 +206,13 @@ class PushViewController: UIViewController, UINavigationControllerDelegate, UIIm
            picker.allowsEditing = true
            present(picker, animated: true)
        }
-       
-    
 
 
-  
 
-    
+
+
+
+
 }
 protocol addSongDelegate: UIViewController {
     func addSong(song: Clothes)
